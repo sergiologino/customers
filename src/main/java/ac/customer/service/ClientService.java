@@ -3,6 +3,7 @@ package ac.customer.service;
 import ac.customer.model.Client;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientService<client> {
 
@@ -18,10 +19,11 @@ public interface ClientService<client> {
     List<client> readAll();
     /**
      * Возвращает клиента по его ID
+     *
      * @param id - ID клиента
      * @return - объект клиента с заданным ID
      */
-    Client read(int id);
+    Optional<Client> read(int id);
     /**
      * Обновляет клиента с заданным ID,
      * в соответствии с переданным клиентом

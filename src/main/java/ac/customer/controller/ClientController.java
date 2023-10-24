@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ClientController {
@@ -31,10 +32,10 @@ public class ClientController {
                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @GetMapping(value="/clients/{id}")
-    public ResponseEntity<Client> read(@PathVariable(name="id") int id) {
-        final Client client = clientService.read(id);
+    public ResponseEntity<? extends Object> read(@PathVariable(name="id") int id) {
+        final Optional client = clientService.read(id);
         return client != null
-                ? new ResponseEntity<>(client,HttpStatus.OK)
+                ? new ResponseEntity<Optional>(client,HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @PutMapping(value="/clients/{id}")

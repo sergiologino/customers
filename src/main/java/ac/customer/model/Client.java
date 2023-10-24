@@ -1,11 +1,23 @@
 package ac.customer.model;
 
-public class Client {
-    private Integer id;
-    private String name;
-    private String email;
-    private String phone;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="clients")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Client {
+    @Id
+    @Column(name="id")
+    @SequenceGenerator(name="clientsIdSec", sequenceName = "clients_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "clientsIdSec")
+    private Integer id;
+    @Column(name="name")
+    private String name;
+    @Column(name="email")
+    private String email;
+    @Column(name="phone")
+    private String phone;
     public Integer getId() {
         return id;
     }
